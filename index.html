@@ -3,497 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PRIAM — Precision Radio Instrument for Antenna Measurements</title>
-  <meta name="description" content="PRIAM is a drone-based antenna calibrator for 21-cm cosmology and low-frequency radio instruments: precise in-flight magnitude and phase measurements of an antenna-under-test with RTK positioning.">
-  <meta property="og:title" content="PRIAM — Drone-based antenna calibration">
-  <meta property="og:description" content="A drone-borne, dual-polarization antenna calibration system for 21-cm cosmology and low-frequency radio instruments.">
-  <meta property="og:image" content="public/images/hero-drone.jpg">
-  <link rel="icon" href="public/images/favicon.png" type="image/x-icon">
+  <title>Mithun — projects</title>
+  <meta name="description" content="Two projects: TickerMentor, a beginner-friendly stock research and learning app, and PRIAM, a drone-based antenna calibration instrument.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0f14'/%3E%3Cpath d='M8 22V10M14 22V6M20 22V14M26 22V9' stroke='%235b9dff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="public/images/hero-drone.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="public/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0a0d12; --surface:#11161e; --border:#202934; --text:#e9eef5;
+      --text-2:#9aa8bb; --text-3:#6d7b8e; --accent:#5b9dff; --up:#3ddc84;
+      --max:1000px;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.6; -webkit-font-smoothing:antialiased;
+      background-image:
+        radial-gradient(60% 50% at 15% 0%, rgba(91,157,255,.14), transparent 70%),
+        radial-gradient(50% 40% at 85% 5%, rgba(61,220,132,.08), transparent 70%);
+      background-repeat:no-repeat;
+    }
+    .wrap { width:min(var(--max), 100% - 2.5rem); margin-inline:auto; }
+    h1,h2,h3 { margin:0; line-height:1.15; letter-spacing:-.02em; }
+    h1 { font-size:clamp(2rem, 5vw, 3.1rem); font-weight:800; }
+    h2 { font-size:1.3rem; font-weight:650; }
+    h3 { font-size:1rem; }
+    p { margin:0 0 .9em; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .mono { font-family:"JetBrains Mono",monospace; }
+
+    header { padding:clamp(3rem,9vh,6rem) 0 2.5rem; }
+    .eyebrow {
+      font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--text-3); margin-bottom:1rem;
+    }
+    .lede { color:var(--text-2); font-size:1.06rem; max-width:60ch; margin-top:1.1rem; }
+
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; padding-bottom:3rem; }
+    .card {
+      display:flex; flex-direction:column;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:16px; padding:1.5rem;
+      transition:border-color .18s, transform .18s;
+    }
+    .card:hover { border-color:#2f3d4e; transform:translateY(-3px); }
+    .card-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+    .mark {
+      display:grid; place-items:center; width:40px; height:40px;
+      border-radius:11px; background:#1a2430; color:var(--accent);
+    }
+    .mark svg { width:21px; height:21px; }
+    .mark.green { color:var(--up); }
+    .badge {
+      font-size:.66rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+      padding:.22rem .5rem; border-radius:5px; background:#1a2430; color:var(--text-3);
+    }
+    .badge.live { background:rgba(61,220,132,.12); color:var(--up); }
+    .card h2 { margin-bottom:.35rem; }
+    .card .sub { color:var(--text-3); font-family:"JetBrains Mono",monospace; font-size:.74rem; margin-bottom:.9rem; }
+    .card p { color:var(--text-2); font-size:.92rem; flex:1; }
+    .tags { display:flex; flex-wrap:wrap; gap:.35rem; margin:.9rem 0 0; padding:0; list-style:none; }
+    .tags li {
+      font-size:.7rem; padding:.2rem .5rem; border-radius:999px;
+      border:1px solid var(--border); color:var(--text-3);
+    }
+    .go {
+      display:inline-flex; align-items:center; gap:.4rem; margin-top:1.2rem;
+      font-weight:600; font-size:.92rem;
+    }
+    .go svg { width:14px; height:14px; }
+
+    footer { border-top:1px solid var(--border); padding:1.5rem 0 2.5rem; color:var(--text-3); font-size:.8rem; }
+    footer p { max-width:74ch; }
+
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body>
-  <canvas id="starfield" aria-hidden="true"></canvas>
-  <div class="aurora" aria-hidden="true"></div>
-
-  <!-- ================= NAV ================= -->
-  <header class="nav" id="nav">
-    <a class="nav-brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
-          <circle cx="16" cy="16" r="3.2"/>
-          <path d="M16 12.8V4M16 19.2V28M12.8 16H4M19.2 16H28"/>
-        </svg>
-      </span>
-      <span class="brand-text">PRIAM<span class="brand-sub">antenna calibration</span></span>
-    </a>
-
-    <nav class="nav-links" id="navLinks" aria-label="Sections">
-      <a href="#overview">Overview</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#drones">Drones</a>
-      <a href="#payload">Payload</a>
-      <a href="#rf">RF Modules</a>
-      <a href="#specs">Specs</a>
-    </nav>
-
-    <div class="nav-actions">
-      <a class="btn btn-ghost" href="https://krishnamakhija.gitbook.io/priam/" target="_blank" rel="noopener">GitBook</a>
-      <a class="btn btn-primary" href="https://github.com/km5es/Drone-Project-code" target="_blank" rel="noopener">Code</a>
-      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span>
-      </button>
-    </div>
+  <header class="wrap">
+    <p class="eyebrow">Mithun · project index</p>
+    <h1>Two things I've been building.</h1>
+    <p class="lede">
+      A stock-research assistant that teaches while it screens, and a drone-borne radio instrument for
+      calibrating antennas used in 21&nbsp;cm cosmology. Both are static sites — no build step, no server.
+    </p>
   </header>
 
-  <main id="top">
-    <!-- ================= HERO ================= -->
-    <section class="hero">
-      <div class="hero-media">
-        <img src="public/images/hero-drone.jpg" width="1408" height="768" fetchpriority="high" alt="A hexacopter carrying a crossed-dipole antenna payload against a star field">
-        <div class="hero-veil"></div>
+  <main class="wrap grid">
+    <article class="card">
+      <div class="card-top">
+        <span class="mark green" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <path d="M4 19V11M9.5 19V5M15 19V14M20.5 19V8"/>
+          </svg>
+        </span>
+        <span class="badge live">Interactive app</span>
       </div>
-
-      <div class="hero-inner">
-        <p class="eyebrow"><span class="dot"></span> Drone-based metrology for radio astronomy</p>
-        <h1>
-          <span class="hero-mark">PRIAM</span>
-          <span class="hero-long">Precision Radio Instrument<br>for Antenna Measurements</span>
-        </h1>
-        <p class="hero-lede">
-          A flying calibration source. PRIAM measures the magnitude <em>and</em> phase response of an
-          antenna-under-test in the far field, from a hovering hexacopter with centimetre-level RTK
-          positioning — built for 21&nbsp;cm cosmology and low-frequency radio instruments.
-        </p>
-
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#overview">Explore the instrument</a>
-          <a class="btn btn-outline btn-lg" href="https://github.com/km5es/Drone-Project-CAD" target="_blank" rel="noopener">
-            CAD repository
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5"/></svg>
-          </a>
-        </div>
-
-        <ul class="hero-stats">
-          <li><strong>70&nbsp;MHz – 6&nbsp;GHz</strong><span>SDR tuning range</span></li>
-          <li><strong>35–40&nbsp;min</strong><span>flight endurance</span></li>
-          <li><strong>2 pol + circ</strong><span>calibration modes</span></li>
-          <li><strong>12&nbsp;kg</strong><span>payload capacity</span></li>
-        </ul>
-      </div>
-
-      <a class="hero-scroll" href="#overview" aria-label="Scroll to overview">
-        <span></span>
+      <h2>TickerMentor</h2>
+      <p class="sub">stocks · learning · paper trading</p>
+      <p>
+        Explains which companies look attractive <em>and why</em>, scores them on five axes with a risk
+        profile you control, and teaches the fundamentals in 24 short lessons. Includes a virtual
+        portfolio so the first time you feel a loss, it costs nothing.
+      </p>
+      <ul class="tags">
+        <li>US + Indian markets</li>
+        <li>Live-data ready</li>
+        <li>Glossary &amp; quizzes</li>
+        <li>Virtual trading</li>
+      </ul>
+      <a class="go" href="tickermentor/">
+        Open TickerMentor
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
-    </section>
+    </article>
 
-    <!-- ================= OVERVIEW ================= -->
-    <section id="overview" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> The problem</p>
-          <h2>Antennas are rarely calibrated where they are used.</h2>
-          <p class="section-lede">
-            Low-frequency radio experiments — especially those chasing the redshifted 21&nbsp;cm line —
-            live and die by how well they know their beams and their spectral response. A dish or a
-            dipole is normally characterised with a fixed boresight tower, a far-field range, or a
-            celestial source. All three are expensive, geometry-limited, or far too dim.
-          </p>
-        </div>
-
-        <div class="split">
-          <div class="split-body">
-            <p>
-              PRIAM inverts the arrangement. Instead of bringing the antenna to a test range, it flies
-              a known transmitter to the antenna. A hexacopter carries a software-defined radio and a
-              switchable dual-polarization crossed dipole, hovers at a sequence of precisely known
-              positions in the far field, and records the received signal on the ground.
-            </p>
-            <p>
-              Because the source position is known to the centimetre via RTK GPS — and because the
-              payload records phase against a common frequency reference — the measurement yields a
-              full complex response of the antenna-under-test, in amplitude and phase, across the sky.
-            </p>
-            <ul class="checklist">
-              <li>Far-field sampling without a tower or a turntable</li>
-              <li>Complex (magnitude + phase) beam mapping</li>
-              <li>Dual-linear and circular polarization calibration</li>
-              <li>Repeatable flight paths from a generated trajectory</li>
-            </ul>
-          </div>
-
-          <figure class="split-figure">
-            <img src="public/images/field.jpg" width="1584" height="672" alt="A drone hovering over a field at dusk with a radio telescope on the horizon" loading="lazy">
-            <figcaption>The calibration source flies, the antenna stays put. Field work at the edge of a radio-quiet site.</figcaption>
-          </figure>
-        </div>
+    <article class="card">
+      <div class="card-top">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="2.5"/>
+            <path d="M12 9.5V4M12 14.5V20M9.5 12H4M14.5 12H20"/>
+          </svg>
+        </span>
+        <span class="badge">Project page</span>
       </div>
-    </section>
-
-    <!-- ================= ARCHITECTURE ================= -->
-    <section id="architecture" class="section section-tint">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> System architecture</p>
-          <h2>One experiment, two aircraft, five subsystems.</h2>
-          <p class="section-lede">
-            The block diagram below is the whole experiment: flight platform, power, positioning,
-            payload computing, and the RF chain that turns a hovering drone into a calibrated source.
-          </p>
-        </div>
-
-        <div class="diagram" role="img" aria-label="Block diagram: drone platform with RTK GPS, flight controller, telemetry and power feeds a payload computer, which drives a software-defined radio through an RF switch and dual-polarization balun to a crossed-dipole antenna, referenced to a high-accuracy frequency reference.">
-          <div class="diagram-col">
-            <h3 class="diagram-title">Flight platform</h3>
-            <div class="node">
-              <span class="node-k">Airframe</span>
-              <span class="node-v">Tarot T960 / F450</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Flight controller</span>
-              <span class="node-v">Pixhawk 2.4.8 / CubeOrange</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Positioning</span>
-              <span class="node-v">Drotek F9P RTK GPS</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Links</span>
-              <span class="node-v">915 MHz SiK · 2.4 GHz RC</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Power</span>
-              <span class="node-v">12 Ah Li-Po · 35–40 min</span>
-            </div>
-          </div>
-
-          <div class="diagram-arrow" aria-hidden="true"></div>
-
-          <div class="diagram-col diagram-col--accent">
-            <h3 class="diagram-title">Payload</h3>
-            <div class="node node--accent">
-              <span class="node-k">Compute</span>
-              <span class="node-v">Raspberry Pi 4B + UPS</span>
-            </div>
-            <div class="node node--accent">
-              <span class="node-k">Receiver</span>
-              <span class="node-v">Ettus B205-mini · 70 MHz–6 GHz</span>
-            </div>
-            <div class="node node--accent">
-              <span class="node-k">Switching</span>
-              <span class="node-v">Custom RF switch network</span>
-            </div>
-            <div class="node node--accent">
-              <span class="node-k">Feed</span>
-              <span class="node-v">Dual-pol balun</span>
-            </div>
-            <div class="node node--accent">
-              <span class="node-k">Radiator</span>
-              <span class="node-v">Crossed dipoles, 70 MHz–1 GHz</span>
-            </div>
-          </div>
-
-          <div class="diagram-arrow" aria-hidden="true"></div>
-
-          <div class="diagram-col">
-            <h3 class="diagram-title">References</h3>
-            <div class="node">
-              <span class="node-k">Timing</span>
-              <span class="node-v">High-accuracy frequency reference</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Geometry</span>
-              <span class="node-v">RTK baseline + attitude</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Under test</span>
-              <span class="node-v">Antenna-under-test (ground)</span>
-            </div>
-            <div class="node">
-              <span class="node-k">Output</span>
-              <span class="node-v">Complex beam &amp; phase response</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= DRONES ================= -->
-    <section id="drones" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> The aircraft</p>
-          <h2>Two airframes: one to learn on, one to fly the experiment.</h2>
-        </div>
-
-        <article class="craft craft--f450">
-          <div class="craft-figure">
-            <img src="public/images/f450.jpg" width="1408" height="768" alt="Flamewheel F450 test quadcopter on a lab bench" loading="lazy">
-            <span class="craft-tag">Testbed</span>
-          </div>
-          <div class="craft-body">
-            <h3>Flamewheel F450</h3>
-            <p class="craft-sub">A scaled-down drone for experimentation and testing</p>
-            <p>
-              The small airframe carries the risk. It was used to validate the custom ROS nodes, prove
-              out RTK performance in the air, and trial new versions of the flight stack before they
-              ever touched the full payload. It also hosted feature evaluations such as RPM-based gyro
-              filtering and system-model verification.
-            </p>
-            <dl class="spec-list">
-              <div><dt>Frame</dt><dd>Flamewheel F450</dd></div>
-              <div><dt>Motors</dt><dd>DJI 2312E, 960 KV</dd></div>
-              <div><dt>Propellers</dt><dd>DJI 9450</dd></div>
-              <div><dt>ESC</dt><dd>APD 80A F-Series 80F3[X]</dd></div>
-              <div><dt>Flight controller</dt><dd>Pixhawk 2.1 CubeOrange</dd></div>
-              <div><dt>GPS</dt><dd>Drotek F9P RTK</dd></div>
-              <div><dt>Sonar</dt><dd>Maxbotix MB1242</dd></div>
-              <div><dt>Radio</dt><dd>FrSky X8R</dd></div>
-              <div><dt>Telemetry</dt><dd>915 MHz SiK</dd></div>
-              <div><dt>Battery</dt><dd>4S 4500 mAh Li-Po</dd></div>
-              <div><dt>Payload</dt><dd>ODROID XU4 single-board computer</dd></div>
-            </dl>
-          </div>
-        </article>
-
-        <article class="craft craft--t960 craft--reverse">
-          <div class="craft-figure">
-            <img src="public/images/payload.jpg" width="1408" height="768" alt="The PRIAM payload: electronics enclosure with SDR and crossed-dipole antenna" loading="lazy">
-            <span class="craft-tag craft-tag--live">Flight article</span>
-          </div>
-          <div class="craft-body">
-            <h3>Tarot T960 — PRIAM</h3>
-            <p class="craft-sub">The full experiment, payload and all</p>
-            <p>
-              The science aircraft. It has the lift for the complete payload and the endurance to
-              execute a multi-point calibration trajectory. Using a
-              <a href="https://github.com/km5es/Drone-Project-code" target="_blank" rel="noopener">custom autonomous calibration routine</a>,
-              it performs extremely precise magnitude and phase measurements of the antenna-under-test.
-            </p>
-            <dl class="spec-list">
-              <div><dt>Frame</dt><dd>Tarot T960</dd></div>
-              <div><dt>Motors</dt><dd>Tarot 5008, 340 KV</dd></div>
-              <div><dt>Propellers</dt><dd>Tarot 1855</dd></div>
-              <div><dt>ESC</dt><dd>APD 80A F-Series 80F3[X]</dd></div>
-              <div><dt>Battery</dt><dd>12 Ah — 35–40 min expected endurance</dd></div>
-              <div><dt>Capacity</dt><dd>12 kg total weight</dd></div>
-              <div><dt>Landing gear</dt><dd>Retractable</dd></div>
-              <div><dt>Flight controller</dt><dd>Pixhawk 2.4.8</dd></div>
-              <div><dt>GPS</dt><dd>Drotek F9P RTK</dd></div>
-              <div><dt>Telemetry</dt><dd>915 MHz SiK</dd></div>
-              <div><dt>Radio</dt><dd>2.4 GHz X8R</dd></div>
-              <div><dt>Sonar</dt><dd>Maxbotix MB1242</dd></div>
-            </dl>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ================= PAYLOAD ================= -->
-    <section id="payload" class="section section-tint">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> Science payload</p>
-          <h2>Everything needed to make a trustworthy measurement, in the air.</h2>
-          <p class="section-lede">
-            The payload is a self-contained radio instrument: its own computer, its own power, its own
-            frequency reference, and an antenna that can be reconfigured in flight.
-          </p>
-        </div>
-
-        <div class="payload-grid">
-          <article class="card">
-            <span class="card-num">01</span>
-            <h3>Payload computer</h3>
-            <p>Raspberry Pi 4B with an uninterruptible power supply and its own battery, isolated from
-              the flight battery. It schedules the SDR, commands the RF switch, and streams captures to
-              storage.</p>
-          </article>
-          <article class="card">
-            <span class="card-num">02</span>
-            <h3>Software-defined radio</h3>
-            <p>Ettus B205-mini covering 70&nbsp;MHz to 6&nbsp;GHz. Wide instantaneous bandwidth makes
-              broadband antenna characterisation practical in a single pass.</p>
-          </article>
-          <article class="card">
-            <span class="card-num">03</span>
-            <h3>Frequency reference</h3>
-            <p>A high-accuracy reference disciplines the payload so that phase remains coherent across
-              the flight — the difference between a beam map and a phase measurement.</p>
-          </article>
-          <article class="card">
-            <span class="card-num">04</span>
-            <h3>Antenna system</h3>
-            <p>Dual-polarization, half-wavelength, telescopic crossed dipoles tunable from 70&nbsp;MHz to
-              1&nbsp;GHz, fed through a custom dual-polarization balun.</p>
-          </article>
-          <article class="card">
-            <span class="card-num">05</span>
-            <h3>RF switching</h3>
-            <p>A custom switch network selects X, Y, or circular polarization, so one flight can deliver
-              a full polarization set instead of one.</p>
-          </article>
-          <article class="card">
-            <span class="card-num">06</span>
-            <h3>Geometry</h3>
-            <p>RTK GPS fixes each measurement point to the centimetre, tying every sample to a known
-              far-field direction and range.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= RF MODULES ================= -->
-    <section id="rf" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> Custom RF hardware</p>
-          <h2>Boards designed for this experiment.</h2>
-          <p class="section-lede">
-            Nothing off the shelf does polarization switching at these wavelengths on a flying
-            platform, so the RF chain was designed in-house. Sources in Microwave Office, Eagle, and
-            Fusion&nbsp;360 live in the <a href="https://github.com/km5es/Drone-Project-CAD/tree/master/RF_Related" target="_blank" rel="noopener">RF Related</a> folder.
-          </p>
-        </div>
-
-        <div class="rf-grid">
-          <article class="rf-card">
-            <div class="rf-figure">
-              <img src="public/images/rf-switch.jpg" width="1408" height="768" alt="Custom RF switch PCB with SMA connectors" loading="lazy">
-            </div>
-            <div class="rf-body">
-              <h3>RF switches</h3>
-              <p>Two designs. A simple switch enables X- and Y-polarization calibration; a larger
-                network of RF switches extends the same idea to X-, Y-, and circular-polarization
-                calibration.</p>
-              <ul class="pills">
-                <li>X / Y selection</li>
-                <li>X / Y / circular</li>
-                <li>Flight-rated layout</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="rf-card">
-            <div class="rf-figure">
-              <img src="public/images/balun.jpg" width="1408" height="768" alt="Dual-polarization balun mounted on a mast with crossed dipoles" loading="lazy">
-            </div>
-            <div class="rf-body">
-              <h3>Dual-pol balun</h3>
-              <p>A vertically oriented, dual-polarization balun that feeds the crossed dipoles. It is
-                the mechanical and electrical interface between the payload's coax runs and the
-                radiating elements.</p>
-              <ul class="pills">
-                <li>Dual polarization</li>
-                <li>Vertical orientation</li>
-                <li>70 MHz – 1 GHz</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= SPECS ================= -->
-    <section id="specs" class="section section-tint">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> At a glance</p>
-          <h2>PRIAM specification sheet.</h2>
-        </div>
-
-        <div class="table-wrap">
-          <table class="spec-table">
-            <caption class="sr-only">PRIAM system specifications</caption>
-            <tbody>
-              <tr><th scope="row">Experiment</th><td>Drone-based antenna calibration for 21 cm cosmology and low-frequency radio instruments</td></tr>
-              <tr><th scope="row">Airframe</th><td>Tarot T960 (flight) · Flamewheel F450 (testbed)</td></tr>
-              <tr><th scope="row">Endurance</th><td>35–40 min with 12 Ah pack</td></tr>
-              <tr><th scope="row">Payload capacity</th><td>12 kg total</td></tr>
-              <tr><th scope="row">Positioning</th><td>Drotek F9P RTK GPS, centimetre-level</td></tr>
-              <tr><th scope="row">SDR</th><td>Ettus B205-mini, 70 MHz – 6 GHz</td></tr>
-              <tr><th scope="row">Antenna</th><td>Dual-pol, half-wavelength telescopic crossed dipoles, 70 MHz – 1 GHz</td></tr>
-              <tr><th scope="row">Polarizations</th><td>X, Y, and circular (via RF switch network)</td></tr>
-              <tr><th scope="row">Measured quantities</th><td>Magnitude and phase of the antenna-under-test</td></tr>
-              <tr><th scope="row">Timing</th><td>High-accuracy frequency reference</td></tr>
-              <tr><th scope="row">Payload computer</th><td>Raspberry Pi 4B with UPS and independent battery</td></tr>
-              <tr><th scope="row">Flight stack</th><td>PX4 / ArduPilot via Pixhawk, custom ROS nodes</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= RESOURCES ================= -->
-    <section id="resources" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow"><span class="dot"></span> Go deeper</p>
-          <h2>CAD, code, and documentation.</h2>
-        </div>
-
-        <div class="link-grid">
-          <a class="link-card" href="https://krishnamakhija.gitbook.io/priam/" target="_blank" rel="noopener">
-            <span class="link-kicker">Documentation</span>
-            <h3>PRIAM GitBook</h3>
-            <p>The complete project guide — design rationale, build notes, and measurement results.</p>
-            <span class="link-go">krishnamakhija.gitbook.io/priam <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5"/></svg></span>
-          </a>
-
-          <a class="link-card" href="https://github.com/km5es/Drone-Project-code" target="_blank" rel="noopener">
-            <span class="link-kicker">Software</span>
-            <h3>ROS &amp; SDR code</h3>
-            <p>Custom ROS nodes, SDR capture pipeline, and the autonomous flight-path generator.</p>
-            <span class="link-go">km5es/Drone-Project-code <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5"/></svg></span>
-          </a>
-
-          <a class="link-card" href="https://github.com/km5es/Drone-Project-CAD" target="_blank" rel="noopener">
-            <span class="link-kicker">Hardware</span>
-            <h3>CAD &amp; PCB files</h3>
-            <p>Full 3D models, drawings, Inventor and Fusion 360 sources for both drones and the RF modules.</p>
-            <span class="link-go">km5es/Drone-Project-CAD <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5"/></svg></span>
-          </a>
-        </div>
-      </div>
-    </section>
+      <h2>PRIAM</h2>
+      <p class="sub">drone hardware · RF · radio astronomy</p>
+      <p>
+        Precision Radio Instrument for Antenna Measurements: a hexacopter that flies a calibrated
+        dual-polarisation source to an antenna-under-test and measures its complex response in flight.
+        Built for 21&nbsp;cm cosmology and low-frequency radio instruments.
+      </p>
+      <ul class="tags">
+        <li>Tarot T960</li>
+        <li>70 MHz – 6 GHz SDR</li>
+        <li>RTK positioning</li>
+        <li>Custom RF boards</li>
+      </ul>
+      <a class="go" href="priam/">
+        Open the PRIAM page
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </article>
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <div class="footer-brand">
-        <span class="hero-mark hero-mark--sm">PRIAM</span>
-        <p>Precision Radio Instrument for Antenna Measurements</p>
-      </div>
-      <div class="footer-cols">
-        <div>
-          <h4>Repository</h4>
-          <a href="#architecture">Architecture</a>
-          <a href="#drones">Drones</a>
-          <a href="#payload">Payload</a>
-          <a href="#rf">RF modules</a>
-        </div>
-        <div>
-          <h4>External</h4>
-          <a href="https://krishnamakhija.gitbook.io/priam/" target="_blank" rel="noopener">GitBook</a>
-          <a href="https://github.com/km5es/Drone-Project-code" target="_blank" rel="noopener">Code</a>
-          <a href="https://github.com/km5es/Drone-Project-CAD" target="_blank" rel="noopener">CAD files</a>
-          <a href="LICENSE" target="_blank" rel="noopener">License</a>
-        </div>
-      </div>
-    </div>
-    <div class="wrap footer-note">
+  <footer>
+    <div class="wrap">
       <p>
-        Several sub-assemblies and parts in the 3D models originate from <a href="https://grabcad.com/" target="_blank" rel="noopener">GrabCAD</a>;
-        credit is due to their creators. None of this work is towards commercialisation or monetary profit.
+        TickerMentor is an educational tool, not an investment adviser: it makes no forecasts and gives
+        no recommendations. Its bundled figures are sample data. PRIAM page imagery is illustrative.
       </p>
-      <p class="footer-credit">Imagery on this page is illustrative.</p>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
