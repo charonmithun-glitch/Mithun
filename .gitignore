@@ -1,2 +1,6 @@
 # dependencies
 vendor
+
+# OS / editor
+.DS_Store
+Thumbs.db

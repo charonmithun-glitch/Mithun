@@ -1,79 +1,44 @@
-# Valentine Website
+# PRIAM — Precision Radio Instrument for Antenna Measurements
 
-A valentine website for your bae. <br>
-This project gives you a template to use and edit for your valentine website instead of building one from scratch <br>
+A landing page for **PRIAM**, a drone-based antenna calibration system for 21-cm cosmology and
+low-frequency radio instruments. Open `index.html` directly, or serve the folder statically.
 
-Edit the *'script.js'* file to customize the message and *'send_mail.php'* file to send an email from your email address.
-
-## 
-
-This project is based on [in-all-the-stars](https://github.com/KalDrongo/in-all-the-stars), created by [KalDrongo](https://github.com/KalDrongo). 
-
-*Features added:*
-
-- background stars blinking
-- cursor change
-- mobile responsiveness
-- send email functionality
-- text glow effect
-
-## ⚒️ Languages / Library
-- HTML
-- CSS
-- Javascript
-- PHP
-- [PHPMailer](https://github.com/PHPMailer/PHPMailer)
-
-
-## 💻 Demo
-
-Check out the demo website: [Valentine-website](https://sojijr.github.io/valentine-website/)
-
-## How to use
-Click [`Use this template`](https://github.com/sojijr/valentine-website/generate) and it will create a new repo not a fork with all the files of this project for you.
-
-![image](https://user-images.githubusercontent.com/78784850/198232353-35fa6d2f-5816-4818-9381-a5bf394b146a.png)
-
-## Prerequisites to use 👇🏽
-- [Composer](https://getcomposer.org/) - to use
-before installation, please make sure you have it already installed.
-
-## 🛠️ Installation Steps
-
-1. After generating a new repo using this template, clone the project, you can use the following command:
-
-```bash
-git clone https://github.com/<your-github-username>/valentine-website
+```
+python3 -m http.server 8000
+# then open http://localhost:8000
 ```
 
-2. Move the cloned repository to Xampp/htdocs or wamp64/www <br>
+No build step, no dependencies — plain HTML, CSS, and vanilla JavaScript.
 
-3. Navigate to the project directory
+## What's here
 
-```bash
-cd Xampp/htdocs/valentine-website or wamp64/www/valentine-website
-```
+| Path | Contents |
+| --- | --- |
+| `index.html` | All page content: overview, block diagram, drones, payload, RF modules, specs, links |
+| `public/style.css` | Design system, layout, responsive rules, reveal animations |
+| `script.js` | Background starfield, sticky nav, mobile menu, scroll reveal, active-section tracking |
+| `public/images/` | Illustrative renders used on the page |
 
-4. Install dependencies with composer install
+## The project in one paragraph
 
-```bash
-composer install
-```
+A Tarot T960 hexacopter carries an Ettus B205-mini SDR, a Raspberry Pi 4B payload computer, custom
+RF switching, and a dual-polarization crossed-dipole antenna referenced to a high-accuracy frequency
+standard. Flying a generated far-field trajectory with RTK GPS positioning, it measures the complex
+(magnitude and phase) response of an antenna-under-test in X, Y, and circular polarization. A
+Flamewheel F450 serves as the cheap testbed for ROS nodes, flight-stack changes, and RTK trials.
 
-5. Run the project by entering the URL below on your browser to run it
+## Related repositories
 
-```bash
-http://localhost/valentine-website/
-```
+- **CAD, PCB, and RF simulation files** — [km5es/Drone-Project-CAD](https://github.com/km5es/Drone-Project-CAD)
+- **ROS nodes, SDR code, flight-path generator** — [km5es/Drone-Project-code](https://github.com/km5es/Drone-Project-code)
+- **Project guide** — [krishnamakhija.gitbook.io/priam](https://krishnamakhija.gitbook.io/priam/)
 
-## 👩🏽‍💻 Contributing
+## Credits
 
-Any contributions you make are greatly appreciated.
+Several sub-assemblies and parts in the 3D models were obtained from [GrabCAD](https://grabcad.com/);
+credit is due to their creators. None of this work is towards commercialisation or monetary profit.
+Images on the page are illustrative renders, not photographs of the built hardware.
 
-## 🛡️ License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏🏽 Support
-
-This project needs a star️ from you. Don't forget to star it✨
+MIT — see [LICENSE](LICENSE).
